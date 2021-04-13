@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [counter, setCounter] = useState(0)
+  const [flag, setFlag] = useState(true)
 
   const click = ()=>{
     setCounter(counter+1)
@@ -10,16 +11,16 @@ function App() {
 
   const [cls, setCls] = useState(`c`)
 
-    let flag = true
+
     const colorChange = ()=>{
       if (flag){
-          setCls(`c`)
+          // setCls(`c`)
           console.log(`c`)
       } else {
-          setCls(`d`)
+          // setCls(`d`)
           console.log(`d`)
       }
-      flag = !flag
+      setFlag(prevState => !prevState)
     }
 
   return (
@@ -31,7 +32,7 @@ function App() {
       <button onClick={click}>click</button>
         <br/>
         <br/>
-        <h1 className={cls}>COLOR</h1>
+        <h1 className={flag ? 'c': 'd'}>COLOR</h1>
         <br/>
         <br/>
         <button onClick={colorChange}>Change Color</button>
