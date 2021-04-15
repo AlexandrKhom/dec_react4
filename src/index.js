@@ -4,9 +4,38 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+
+const initialState = { counter: 0}
+
+const reducer = (state = initialState, action )=>{
+    switch (action.type) {
+        case `INC`:{
+            return {...state, counter: state.counter + 1}
+        }
+        case `INC_CUS`:{
+            return {...state, counter: state.counter + action.payload}
+        }
+        case `DEC`:{
+            return {...state, counter: state.counter - 1}
+        }
+        case `RES`:{
+            return {...state, counter: state.counter = 0}
+        }
+        default:{
+            return state
+        }
+    }
+}
+
+const store = createStore(reducer)
+
 ReactDOM.render(
   <React.StrictMode>
+      <Provider store={store}>
     <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
