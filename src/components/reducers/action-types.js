@@ -13,3 +13,8 @@ export const INC_CUSt = `INC_CUSt`;
 export const On_Users = `On_Users`;
 export const On_Bad = `On_Bad`;
 export const On_Good = `On_Good`;
+
+
+export const onStart = `onStart`;
+export const onSet = `onSet`;
+export const onEnd = `onEnd`;

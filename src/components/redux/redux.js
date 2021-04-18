@@ -30,7 +30,7 @@ const persister = (store) => (next) => (action) => {
 
 }
 
-const middleware = [protectCounter, logger, persister]
+const middleware = [protectCounter, /*logger,*/ persister]
 
 
 export const store = createStore(reducer, applyMiddleware(...middleware),

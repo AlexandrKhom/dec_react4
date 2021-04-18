@@ -1,9 +1,65 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {useSelector, useDispatch} from "react-redux";
-import {incAction, incCusAction, resAction, decAction, onUsers, onBad, onGood} from "./components/reducers/action-creates";
-// import {On_Users} from "./components/reducers/action-types";
-// import usersReducer from "./components/reducers/users-reducer";
+import {
+    // incAction,
+    // incCusAction,
+    // resAction,
+    // decAction,
+    onUsers,
+    onBad,
+    onGood,
+    startAct,
+    setAct,
+    endAct
+} from "./components/reducers/action-creates";
+
+
+const Products = () => {
+
+    const {products, isLoading} = useSelector(store => store.products)
+
+    console.log({products, isLoading})
+    const dispatch = useDispatch()
+
+    // const products = useSelector(({products: {products}}) => products)
+    // const isLoading = useSelector(({products: {isLoading}}) =>  isLoading)
+    // console.log(products)
+
+    const fetchProducts = async () => {
+        try {
+            dispatch(startAct())
+            const resp = await fetch(`https://fakestoreapi.com/products`)
+            const json = await resp.json()
+            dispatch(setAct(json))
+            console.log(json)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            dispatch(endAct())
+        }
+    }
+
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+
+    return (<div>
+        {isLoading && (<h1 style={{color: `red`}}>LOADING</h1>)}
+
+        {!isLoading && !!products.length && products.map(el => (
+            <div key={el.id} style={{width: '60%', margin: '10px auto'}}>
+                <h2>{el.title}</h2>
+                <h2>{el.price}</h2>
+                <h2>{el.description}</h2>
+                <img  src={el.image}  />
+            </div>
+        ))}
+        GOGOGOGO
+    </div>)
+}
 
 
 const PhotosList = () => {
@@ -59,13 +115,10 @@ function App() {
     const dispatch = useDispatch()
     return (
         <div className="App">
-            {!!(counter1 % 2) && <PhotosList/>}
-            <h1>{counter1}</h1>
-            <br/> <h1>{counter2}</h1>
-            <button onClick={() => dispatch(incCusAction(100))}>INC_CUS</button>
-            <button onClick={() => dispatch(incAction())}>INC</button>
-            <button onClick={() => dispatch(decAction())}>DEC</button>
-            <button onClick={() => dispatch(resAction())}>RES</button>
+            <Products/>
+
+
+
         </div>
     );
 }
