@@ -1,7 +1,12 @@
 import {INC, DEC, RES, INC_CUS} from "./action-types";
 
 
-const initialState = {counter: 0}
+const initFromLs = localStorage.getItem(`counter1`)
+
+const initialState = initFromLs ? JSON.parse(initFromLs) : {
+    counter: 0,
+    isAllowedToChange: true
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {useSelector, useDispatch} from "react-redux";
 import {incAction, incCusAction, resAction, decAction, onUsers, onBad, onGood} from "./components/reducers/action-creates";
-import {On_Users} from "./components/reducers/action-types";
-import usersReducer from "./components/reducers/users-reducer";
+// import {On_Users} from "./components/reducers/action-types";
+// import usersReducer from "./components/reducers/users-reducer";
 
 
 const PhotosList = () => {
@@ -37,7 +37,7 @@ const PhotosList = () => {
                     const inList = badImp.includes(el.id)
                     dispatch(inList ? onGood(el.id) : onBad(el.id))
                 }}
-                src={el.picture} key={el.id} title={el.firstName}/>))}
+                src={el.picture} key={el.id} title={el.firstName} alt={el.lastName}/>))}
         </div>
     </div>)
 }
