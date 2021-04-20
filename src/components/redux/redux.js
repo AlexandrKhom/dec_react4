@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware} from "redux";
 import {reducer} from "../reducers/reducers";
 import {INC, DEC, RES, INC_CUS} from "../reducers/action-types";
+import thunk from "redux-thunk";
 
 
 const logger = (store) => (next) => (action) => {
@@ -30,9 +31,9 @@ const persister = (store) => (next) => (action) => {
 
 }
 
-const middleware = [protectCounter, logger, persister]
+const middleware = [thunk, /*protectCounter, logger,*/ persister]
 
 
-export const store = createStore(reducer, applyMiddleware(...middleware),
+export const store = createStore(reducer , applyMiddleware(...middleware),
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
